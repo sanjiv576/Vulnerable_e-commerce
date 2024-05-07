@@ -1,0 +1,60 @@
+.single-row-card {
+    height: 400px;
+    margin-top: 40px;
+    width: 80%;
+    margin-left: 10%;
+}
+
+@media screen and (max-width: 1024px) {
+    .single-row-card {
+        height: 600px;
+        width: 100%;
+        margin-left: 5%;
+    }
+
+    .single-row-card img {
+        height: 100%;
+    }
+
+}
+
+.single-card-right div h1 {
+    float: left;
+}
+
+#right-card {
+    height: 400px;
+}
+
+
+.allProductsView h2 {
+    font-size: 30px;
+    font-weight: 600;
+    font-weight: bolder;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+
+}
+
+.allProductsView {
+    display: flex;
+    margin: 30px;
+}
+
+.allProductsView figure img {
+    height: 300px;
+    width: 80%;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+@media screen and (max-width: 1024px) {
+
+    .allProductsView {
+        display: inline;
+        margin: 16px auto 16px auto;
+    }
+
+}
