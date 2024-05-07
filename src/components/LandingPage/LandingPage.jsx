@@ -108,7 +108,7 @@ function LandingPage() {
                             return (
 
                                 <div className="carousel-item mr-5" key={product.id + i}>
-                                    <img src={`https://localhost:3005/product/${product.picture}`} alt="Drink" />
+                                    <img src={`http://localhost:3005/product/${product.picture}`} alt="Drink" />
                                 </div>
 
                             );
@@ -119,7 +119,7 @@ function LandingPage() {
             </div>
 
             <div className="card lg:card-side bg-base-100 shadow-xl single-row-card">
-                <figure><img src={`https://localhost:3005/product/${newReleasedProduct.picture}`} /></figure>
+                <figure><img src={`http://localhost:3005/product/${newReleasedProduct.picture}`} /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-4xl font-bold mb-4">New released!</h2>
                     <p className="justify-center">{newReleasedProduct.description}</p>
@@ -145,7 +145,7 @@ function LandingPage() {
                             return products.map((product) => (
                                 <div key={product.id} className="card bg-base-100 shadow-xl m-4">
                                     <figure>
-                                        <img className="mt-4" src={`https://localhost:3005/product/${product.picture}`} alt="Product" />
+                                        <img className="mt-4" src={`http://localhost:3005/product/${product.picture}`} alt="Product" />
                                     </figure>
                                     <div className="card-body">
                                         <h2>{product.name}</h2>
@@ -184,7 +184,7 @@ function LandingPage() {
             <div className="hero bg-base-200 mb-8">
                 <div className="hero-content flex-col lg:flex-row-reverse">
 
-                    <img id="right-card" src={`https://localhost:3005/product/${hottestProduct.picture}`} className="max-w-sm rounded-lg shadow-2xl" />
+                    <img id="right-card" src={`http://localhost:3005/product/${hottestProduct.picture}`} className="max-w-sm rounded-lg shadow-2xl" />
                     <div className="single-card-right">
                         <h1 className="text-4xl font-bold">Hottest!</h1>
                         <p className="py-6">{hottestProduct.description}</p>

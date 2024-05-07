@@ -66,7 +66,7 @@ export const ResponsiveAppBarHomepage = ({ purchaseProductLength }) => {
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src={`https://localhost:3005/profile/${loginUser.picture}`} />
+                                <img src={`http://localhost:3005/profile/${loginUser.picture}`} />
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -77,7 +77,7 @@ export const ResponsiveAppBarHomepage = ({ purchaseProductLength }) => {
 
 
                             }
-                           {
+                            {
                                 user.user.role === 'admin' ?
                                     <li><NavLink to={'/addProduct'} >Add Product</NavLink></li> : (<></>)
 
@@ -94,7 +94,7 @@ export const ResponsiveAppBarHomepage = ({ purchaseProductLength }) => {
                             }
                             {
                                 user.user.role === 'admin' &&
-                                     <li><NavLink to={'/viewAllProducts'}>View All Products</NavLink></li>
+                                <li><NavLink to={'/viewAllProducts'}>View All Products</NavLink></li>
                             }
 
 

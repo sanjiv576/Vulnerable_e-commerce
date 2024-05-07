@@ -102,7 +102,7 @@ export const ViewAllProducts = () => {
                                             <div className="flex items-center space-x-3">
                                                 <div className="avatar">
                                                     <div className="mask mask-squircle w-12 h-12">
-                                                        <img src={`https://localhost:3005/product/${item.picture}`} alt="Avatar Tailwind CSS Component" />
+                                                        <img src={`http://localhost:3005/product/${item.picture}`} alt="Avatar Tailwind CSS Component" />
                                                     </div>
                                                 </div>
                                                 <div>

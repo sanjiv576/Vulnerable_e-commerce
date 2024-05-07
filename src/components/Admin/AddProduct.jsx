@@ -165,7 +165,7 @@ export const AddProduct = () => {
     return (
         <div>
             {/* <ResponsiveAppBarHomepage purchaseProductLength={0} /> */}
-            <AdminAppBar/>
+            <AdminAppBar />
             <div className="gb-darkzero w-screen m-10">
                 <div className="w-[80] mx-auto" align="center" >
                     <div className='mx-auto pt-10'>
@@ -272,7 +272,7 @@ export const AddProduct = () => {
 
                             <div className="avatar">
                                 <div className="w-60 rounded m-10">
-                                    <img src={`https://localhost:3005/product/${imageName}`} />
+                                    <img src={`http://localhost:3005/product/${imageName}`} />
                                 </div>
                             </div>
 

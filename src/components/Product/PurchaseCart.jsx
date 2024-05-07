@@ -37,7 +37,7 @@ export const PurchaseCart = () => {
             "publicKey": keys.publicTestKey,
             "productIdentity": "1234567890",
             "productName": "Samaan Kinam E-commerce",
-            "productUrl": "https://localhost:3005/",
+            "productUrl": "http://localhost:3005/",
             "eventHandler": {
                 onSuccess(payload) {
                     // hit merchant api for initiating verfication
@@ -121,7 +121,7 @@ export const PurchaseCart = () => {
                                         <div className="flex items-center space-x-3">
                                             {/* <div className="avatar">
                                                 <div className="mask mask-squircle w-12 h-12">
-                                                    <img src={`https://localhost:3005/product/${item.picture}`} alt="Avatar Tailwind CSS Component" />
+                                                    <img src={`http://localhost:3005/product/${item.picture}`} alt="Avatar Tailwind CSS Component" />
                                                 </div>
                                             </div> */}
                                             <div>

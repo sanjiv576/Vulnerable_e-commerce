@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = 'https://localhost:3005/users';
+const baseUrl = 'http://localhost:3005/users';
 const getToken = () => `bearer ${window.localStorage.getItem('token')}`;
 
 const register = (userData) => {
@@ -17,7 +17,7 @@ const lockAccount = (email) => {
 
 const passwordNeedChange = () => {
     return axios.get(`${baseUrl}/passwordNeedChange`, {
-        headers: {Authorization: getToken()}
+        headers: { Authorization: getToken() }
     });
 }
 
@@ -68,7 +68,7 @@ const uploadProfileImage = (selectedImageFile) => {
         }
     };
 
-    return axios.post('https://localhost:3005/uploads', formData, config);
+    return axios.post('http://localhost:3005/uploads', formData, config);
 };
 // upload file or image for profile
 const uploadProductImage = (productId, selectedImageFile) => {
@@ -82,11 +82,11 @@ const uploadProductImage = (productId, selectedImageFile) => {
         }
     };
 
-    return axios.post(`https://localhost:3005/uploads/${productId}`, formData, config);
+    return axios.post(`http://localhost:3005/uploads/${productId}`, formData, config);
 };
 
 const getAllPurchaseProducts = () => {
-    return axios.get('https://localhost:3005/purchase', {
+    return axios.get('http://localhost:3005/purchase', {
         headers: {
             Authorization: getToken()
         }
@@ -95,7 +95,7 @@ const getAllPurchaseProducts = () => {
 };
 
 const unlockAccount = (userId) => {
-    return axios.post(`https://localhost:3005/admin/unlockAccount/${userId}`, {});
+    return axios.post(`http://localhost:3005/admin/unlockAccount/${userId}`, {});
 }
 
 const userServices = {

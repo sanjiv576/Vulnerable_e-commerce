@@ -1,7 +1,7 @@
 
 
 import axios from "axios";
-const baseUrl = 'https://localhost:3005/products';
+const baseUrl = 'http://localhost:3005/products';
 const getToken = () => `bearer ${window.localStorage.getItem('token')}`;
 
 const getAllProudcts = () => {
@@ -27,7 +27,7 @@ const addReview = (productId, review) => {
 };
 
 const deleteReview = (productId, reviewId) => {
-    return axios.delete(`https://localhost:3005/${productId}/${reviewId}`, {
+    return axios.delete(`http://localhost:3005/${productId}/${reviewId}`, {
         headers: {
             Authorization: getToken()
         }
@@ -35,13 +35,13 @@ const deleteReview = (productId, reviewId) => {
 };
 
 const updateReview = (productId, reviewId, updatedReview) => {
-    return axios.put(`https://localhost:3005/${productId}/${reviewId}`, updatedReview, {
+    return axios.put(`http://localhost:3005/${productId}/${reviewId}`, updatedReview, {
         headers: { Authorization: getToken() }
     })
 };
 
 const purchaseProduct = (products) => {
-    return axios.post('https://localhost:3005/purchase', products, {
+    return axios.post('http://localhost:3005/purchase', products, {
         headers: {
             Authorization: getToken()
         }
@@ -51,7 +51,7 @@ const purchaseProduct = (products) => {
 
 // add product by admin only
 const addProduct = (product) => {
-    return axios.post(`https://localhost:3005/admin/product`, product, {
+    return axios.post(`http://localhost:3005/admin/product`, product, {
         headers: {
             Authorization: getToken()
         }
@@ -59,13 +59,13 @@ const addProduct = (product) => {
 };
 
 const editProduct = (productId, updatedProduct) => {
-    return axios.put(`https://localhost:3005/admin/product/${productId}`, updatedProduct, {
+    return axios.put(`http://localhost:3005/admin/product/${productId}`, updatedProduct, {
         headers: { Authorization: getToken() }
     })
 };
 
 const deleteProduct = (productId) => {
-    return axios.delete(`https://localhost:3005/admin/product/${productId}`, {
+    return axios.delete(`http://localhost:3005/admin/product/${productId}`, {
         headers: {
             Authorization: getToken()
         }

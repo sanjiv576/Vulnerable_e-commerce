@@ -51,16 +51,16 @@ export const AdminAppBar = ({ purchaseProductLength }) => {
                     <a className="btn btn-ghost normal-case text-xl">Hi, {loginUser.fullName}</a>
                 </div>
                 <div className="flex-none">
-                  
+
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src={`https://localhost:3005/profile/${loginUser.picture}`} />
+                                <img src={`http://localhost:3005/profile/${loginUser.picture}`} />
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 
-                       
+
                             {
                                 user.user.role === 'admin' ?
                                     <li><NavLink to={'/addProduct'} >Add Product</NavLink></li> : (<></>)
@@ -71,10 +71,10 @@ export const AdminAppBar = ({ purchaseProductLength }) => {
                                 <NavLink to={'/profile'}>Profile</NavLink>
 
                             </li>
-                      
+
                             {
                                 user.user.role === 'admin' &&
-                                     <li><NavLink to={'/viewAllProducts'}>View All Products</NavLink></li>
+                                <li><NavLink to={'/viewAllProducts'}>View All Products</NavLink></li>
                             }
 
                             <li><a onClick={handleLogout}>Logout</a></li>

@@ -259,12 +259,12 @@ function Login() {
 
                                     <br />
 
-                                    <ReCAPTCHA
+                                    {/* <ReCAPTCHA
                                         sitekey={recaptchKeys.secondSiteKey}
                                         onChange={onChange}
-                                    />
+                                    /> */}
 
-                                    {
+                                    {/* {
                                         userVerified ? (
                                             <button onClick={handleLogin} className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
 
@@ -272,7 +272,10 @@ function Login() {
                                             <button onClick={handleLogin} disabled className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
 
                                         )
-                                    }
+                                    } */}
+
+                                    <button onClick={handleLogin} className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
+
 
                                     <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
                                         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>

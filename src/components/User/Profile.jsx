@@ -167,7 +167,7 @@ export const Profile = () => {
             <ResponsiveAppBarHomepage purchaseProductLength={purchase.purchase.length} />
             <div className="avatar">
                 <div className="w-60 rounded m-10">
-                    <img src={`https://localhost:3005/profile/${user.picture}`} />
+                    <img src={`http://localhost:3005/profile/${user.picture}`} />
                 </div>
             </div>
 
