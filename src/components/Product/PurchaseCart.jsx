@@ -13,6 +13,15 @@ export const PurchaseCart = () => {
     const [purchaseProduct, setPurchaseProduct] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
 
+    const [pay, setPay] = useState(0);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        window.alert(`You paid: ${pay}`);
+        setPay(0)
+    }
+
 
     useEffect(() => {
         // fetch all purchase products from the context api
@@ -27,6 +36,20 @@ export const PurchaseCart = () => {
         // calculate total price
         setTotalPrice(purchase.purchase.reduce((total, item) => total + (item.price * item.quantity), 0));
     }, []);
+
+
+    // add Vulnerability
+    const handlePurchase = (e) => {
+        e.preventDefault();
+
+        // set the payment status to success and also from the server
+        setPurchaseProduct({
+            ...purchaseProduct,
+            payment: 'success',
+        });
+        // call the purchase product from server API
+        handlePayAndPurchase();
+    }
 
 
     // pay with khalti gateway
@@ -159,8 +182,8 @@ export const PurchaseCart = () => {
                 purchase.purchase.length > 0 ? (
                     <>
                         <div className="text-info">Note: Rs {totalPrice}/- is equivalent to Rs 200 because of Khalti test-mode payment limitation.</div>
-                        <Button className='w-wide' onClick={handleKhaltiPayment} variant="contained" startIcon={<ShoppingCartCheckoutIcon />}>
-                            Pay and Purchase Now
+                        <Button className='w-wide' onClick={handlePurchase} variant="contained" startIcon={<ShoppingCartCheckoutIcon />}>
+                            Purchase Now
                         </Button>
                     </>
                 )
@@ -168,6 +191,18 @@ export const PurchaseCart = () => {
                         <div className="text-warning">No product in the purchase cart</div>
                     )
             }
+
+            <form onSubmit={handleSubmit}>
+
+                <input type="text"
+                value={pay}
+                onChange={(e) => setPay(e.target.value)}
+                 placeholder='Enter price' />
+
+                <input type="submit" />
+
+            </form>
+
 
         </div>
     )
