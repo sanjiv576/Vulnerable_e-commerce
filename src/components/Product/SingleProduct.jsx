@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useUser } from "../../utils/userContext";
 import sanitizeInput from "../../utils/sanitizationInput";
+import { Height } from "@mui/icons-material";
 
 
 function SingleProduct() {
@@ -184,7 +185,7 @@ function SingleProduct() {
                 return;
             }
 
-            const sanitizedReviewInput = sanitizeInput(feedback);
+            const sanitizedReviewInput = feedback;
             const addedReview = {
                 text: sanitizedReviewInput,
             }
@@ -295,6 +296,20 @@ function SingleProduct() {
     };
 
 
+    const customPropsControlledByAttacker = {
+        dangerouslySetInnerHTML: {
+
+            "__html": "<img onerror='alert(\"Hacked\");' alt='invalid-image' src='https://assets-eu-01.kc-usercontent.com/77bbf83a-1306-0152-fea5-3b5eaf937634/1e6fd406-258e-48f5-9a12-0f910c7aacba/GettyImages-1386184656%20%281%29.jpg' />"
+        }
+    };
+
+
+
+
+
+
+    const url = "javascript: alert(1);";
+
     return (
         <div>
 
@@ -334,6 +349,8 @@ function SingleProduct() {
                 <div className="send-review-section">
                     <Input
                         type="text"
+                        // dangerouslySetInnerHTML={{ __html: edit.isEdit ? edit.text : feedback }}
+
 
                         placeholder="Write a review ..."
                         onChange={edit.isEdit ? (e) => setEdit({ ...edit, text: e.target.value }) : (e) => setFeedback(e.target.value)}
@@ -353,6 +370,10 @@ function SingleProduct() {
                         }
                     />
                 </div>
+
+                {/* <div {...customPropsControlledByAttacker} /> */}
+
+                <div dangerouslySetInnerHTML={{ "__html": feedback }} />
 
                 <div className="view-reviews">
                     {reviews && reviews.length > 0 ? (
@@ -421,3 +442,19 @@ function SingleProduct() {
 }
 
 export default SingleProduct;
+
+
+
+
+// Vulnerability 
+// Payload
+
+{/*
+
+<a href="javascript: alert('You are hacked!!');" >
+<center>
+    <img alt='-image-here'src='https://miro.medium.com/v2/da:true/resize:fit:1096/1*wOzHXuvB06Oo-bhOtgM3nw.gif' />
+</center>
+</a> 
+
+*/}
