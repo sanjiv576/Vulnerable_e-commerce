@@ -6,24 +6,29 @@ import { Button } from '@mui/material';
 import productServices from '../../services/productService';
 import keys from '../../services/khaltiSecrets';
 import KhaltiCheckout from "khalti-checkout-web";
+import userServices from '../../services/userService';
 
 export const PurchaseCart = () => {
     const purchase = usePurchase();
     const navigate = useNavigate();
     const [purchaseProduct, setPurchaseProduct] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
-
+    const [user, setUser] = useState({});
     const [pay, setPay] = useState(0);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        window.alert(`You paid: ${pay}`);
-        setPay(0)
-    }
 
 
     useEffect(() => {
+        userServices.getUser()
+            .then(res => {
+                setUser(res.data)
+                const userData = res.data;
+                console.log(userData)
+            })
+            .catch(err => window.alert(err.response.data.error));
+
+
         // fetch all purchase products from the context api
         setPurchaseProduct(
             {
@@ -38,65 +43,6 @@ export const PurchaseCart = () => {
     }, []);
 
 
-    // add Vulnerability
-    const handlePurchase = (e) => {
-        e.preventDefault();
-
-        // set the payment status to success and also from the server
-        setPurchaseProduct({
-            ...purchaseProduct,
-            payment: 'success',
-        });
-        // call the purchase product from server API
-        handlePayAndPurchase();
-    }
-
-
-    // pay with khalti gateway
-    const handleKhaltiPayment = (e) => {
-        e.preventDefault();
-        let config = {
-            // "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
-            "publicKey": keys.publicTestKey,
-            "productIdentity": "1234567890",
-            "productName": "Samaan Kinam E-commerce",
-            "productUrl": "http://localhost:3005/",
-            "eventHandler": {
-                onSuccess(payload) {
-                    // hit merchant api for initiating verfication
-                    console.log(payload);
-
-                    // set the payment status to success and also from the server
-                    setPurchaseProduct({
-                        ...purchaseProduct,
-                        payment: 'success',
-                    });
-                    // call the purchase product from server API
-                    handlePayAndPurchase();
-                },
-                // onError handler is optional
-                onError(error) {
-                    // handle errors
-                    console.log(error);
-                    window.alert('Payment failed!');
-                },
-                onClose() {
-                    console.log('widget is closing');
-                }
-            },
-            "paymentPreference": ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS", "SCT"],
-        };
-
-        let checkout = new KhaltiCheckout(config);
-
-        // checkout.show({ amount: totalPrice * 100 });
-
-        // because of test mode, the maximum amount is 200 
-        checkout.show({ amount: 200 * 100 });
-
-
-    }
-
     // send the purchase product data to the server
     const handlePayAndPurchase = () => {
         // e.preventDefault();
@@ -104,8 +50,12 @@ export const PurchaseCart = () => {
         console.log(purchaseProduct);
 
         // navigate to the payment page
+        const finalProducts = {
+            items: purchaseProduct.items,
+            payAmount: pay
+        }
 
-        productServices.purchaseProduct(purchaseProduct)
+        productServices.purchaseProduct(finalProducts)
             .then(res => {
                 window.alert('Purchase successfully!');
 
@@ -113,11 +63,50 @@ export const PurchaseCart = () => {
                 purchase.setPurchase([]); // empty the purchase context
                 setPurchaseProduct({});
                 setTotalPrice(0);
+                setPay(0);
 
                 navigate('/home');
             })
             .catch(err => window.alert(err.response.data.error));
     };
+
+
+    const payValidation = () => {
+        if (user.amount >= totalPrice && pay == totalPrice) {
+            console.log('U can pay');
+
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+    // add Vulnerability that price can be reduced
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const isValid = payValidation();
+
+        if (isValid) {
+            const confirmation = window.confirm(`Are you sure want to buy at ${pay}?`);
+            if (confirmation) {
+
+                // call the purchase product from server API
+                handlePayAndPurchase();
+
+            }
+
+        }
+
+        else {
+            window.alert(`Sorry, you cannot buy at Rs ${pay} or out of the balance.`);
+        }
+
+    }
+
+
     return (
         <div className='m-12'>
             <h1 className='text-3xl m-10 font-bold'>Purchase Cart Products</h1>
@@ -181,10 +170,29 @@ export const PurchaseCart = () => {
             {
                 purchase.purchase.length > 0 ? (
                     <>
-                        <div className="text-info">Note: Rs {totalPrice}/- is equivalent to Rs 200 because of Khalti test-mode payment limitation.</div>
-                        <Button className='w-wide' onClick={handlePurchase} variant="contained" startIcon={<ShoppingCartCheckoutIcon />}>
-                            Purchase Now
-                        </Button>
+
+
+                        <form>
+
+                            <input type="text"
+                                onChange={(e) => setPay(e.target.value)}
+                                placeholder='Enter price'
+                                className="input input-bordered input-primary w-full max-w-xs m-12"
+                            />
+
+
+                            <Button className='w-wide'
+                                onClick={handleSubmit}
+                                variant="contained"
+                                startIcon={<ShoppingCartCheckoutIcon
+                                />}>
+                                Purchase Now
+                            </Button>
+
+                        </form>
+                        <div className="text-info">Note: Enter price on the field and pay.</div>
+
+
                     </>
                 )
                     : (
@@ -192,17 +200,7 @@ export const PurchaseCart = () => {
                     )
             }
 
-            <form onSubmit={handleSubmit}>
-
-                <input type="text"
-                value={pay}
-                onChange={(e) => setPay(e.target.value)}
-                 placeholder='Enter price' />
-
-                <input type="submit" />
-
-            </form>
-
+            <div className="text-info">Your total amount is : Rs {user.amount}</div>
 
         </div>
     )
