@@ -446,7 +446,7 @@ export default SingleProduct;
 
 
 
-// Vulnerability 
+// XSS Vulnerability 
 // Payload
 
 {/*
