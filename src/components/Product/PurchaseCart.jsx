@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { Button } from '@mui/material';
 import productServices from '../../services/productService';
-import keys from '../../services/khaltiSecrets';
-import KhaltiCheckout from "khalti-checkout-web";
 import userServices from '../../services/userService';
 
 export const PurchaseCart = () => {

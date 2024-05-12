@@ -60,14 +60,7 @@ function SingleProduct() {
 
 
     useEffect(() => {
-        // console.log(`Auth: ${auth.email}`)
-        // if (auth.email) {
-        //     setIsUserLogin(true);
-        //     console.log(`User is login`);
-        //     // get user id
-        //     setUserId(user.user.id);
-        //     console.log(`User id is : ${userId}`)
-        // }
+     
         if (window.localStorage.getItem('token')) {
             setIsUserLogin(true);
             console.log(`User is login`);

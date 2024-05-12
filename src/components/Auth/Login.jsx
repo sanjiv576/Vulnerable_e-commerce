@@ -7,9 +7,6 @@ import userServices from '../../services/userService';
 import { Alert, Avatar, Chip, Grid, Snackbar, } from '@mui/material';
 import { isEmail } from '../../lib/input-validation';
 import { ResponsiveAppBarLandingPage } from '../AppBar/ResponsiveAppBarLandingPage';
-import ReCAPTCHA from "react-google-recaptcha";
-import recaptchKeys from '../../services/recaptcha';
-import { Check, CheckBox } from '@mui/icons-material';
 
 function Login() {
     const auth = useAuth();
@@ -70,8 +67,6 @@ function Login() {
         setFormError("");
         setFormWarning("");
 
-        // console.log(`Email: ${credentials.email}`);
-        // console.log(`Password: ${credentials.password}`);
 
         if (credentials.email === "" || credentials.password === "") {
             setFormError("Please, enter all the fields.");
@@ -259,20 +254,6 @@ function Login() {
 
                                     <br />
 
-                                    {/* <ReCAPTCHA
-                                        sitekey={recaptchKeys.secondSiteKey}
-                                        onChange={onChange}
-                                    /> */}
-
-                                    {/* {
-                                        userVerified ? (
-                                            <button onClick={handleLogin} className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
-
-                                        ) : (
-                                            <button onClick={handleLogin} disabled className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
-
-                                        )
-                                    } */}
 
                                     <button onClick={handleLogin} className='btn btn-primary w-full font-bold mt-8 mb-8'>LOGIN</button>
 

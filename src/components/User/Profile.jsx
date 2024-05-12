@@ -138,29 +138,7 @@ export const Profile = () => {
 
     const handleDeleteAccount = (e) => {
         e.preventDefault();
-
-        const confirmation = window.confirm('Are you sure you want to delete your account?');
-        if (confirmation) {
-            userServices.deleteAccount()
-                .then(res => {
-                    play();
-                    setSnack({
-                        type: 'success',
-                        message: 'Account deleted successfully',
-                    });
-                    setOpen(true);
-
-                    navigate('/login');
-                })
-                .catch(err => {
-                    play();
-                    setSnack({
-                        type: 'error',
-                        message: err.response.data.error,
-                    });
-                    setOpen(true);
-                })
-        }
+        window.alert('Sorry, this feature is disabled at the moment.');
     };
     return (
         <div>
